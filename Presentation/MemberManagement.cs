@@ -1,7 +1,7 @@
 ﻿using LiMS.Application;
 using LiMS.Domain;
 
-namespace Presentation
+namespace LiMS.Presentation
 {
     public static class MemberManagement
     {
@@ -50,7 +50,7 @@ namespace Presentation
             do
             {
                 Console.Write("Name: ");
-                name = Console.ReadLine();
+                name = Console.ReadLine() ?? "";
 
                 if (string.IsNullOrWhiteSpace(name))
                 {
@@ -65,7 +65,7 @@ namespace Presentation
             do
             {
                 Console.Write("Email: ");
-                email = Console.ReadLine();
+                email = Console.ReadLine() ?? "";
 
                 if (string.IsNullOrWhiteSpace(email))
                 {
@@ -73,7 +73,11 @@ namespace Presentation
                     continue;
                 }
 
-                emailAlreadyExists = libraryService.GetAllMembers().Any(m => m.Email.Equals(email, StringComparison.OrdinalIgnoreCase));
+                emailAlreadyExists = libraryService.GetAllMembers().Any(m =>
+                {
+                    if (m.Email is null) return false;
+                    return m.Email.Equals(email, StringComparison.OrdinalIgnoreCase);
+                });
 
                 if (emailAlreadyExists)
                 {
@@ -92,6 +96,7 @@ namespace Presentation
             libraryService.AddMember(newMember);
             Console.WriteLine("Member added successfully!");
         }
+
         public static void UpdateMember(LibraryService libraryService)
         {
             Console.Write("\nEnter ID of the member to update: ");
@@ -101,9 +106,9 @@ namespace Presentation
                 if (memberToUpdate != null)
                 {
                     Console.Write("New name (leave blank to keep current): ");
-                    string newName = Console.ReadLine();
+                    string newName = Console.ReadLine() ?? "";
                     Console.Write("New email (leave blank to keep current): ");
-                    string newEmail = Console.ReadLine();
+                    string newEmail = Console.ReadLine() ?? "";
 
                     if (!string.IsNullOrWhiteSpace(newName))
                         memberToUpdate.Name = newName;

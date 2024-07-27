@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+
 using LiMS.Domain;
 
 namespace LiMS.Infrastructure
@@ -11,12 +12,12 @@ namespace LiMS.Infrastructure
                 return [];
 
             string membersJson = File.ReadAllText(membersFile);
-            return JsonConvert.DeserializeObject<List<Member>>(membersJson);
+            return JsonConvert.DeserializeObject<List<Member>>(membersJson) ?? new List<Member>();
         }
 
         public Member GetById(int id)
         {
-            return GetAll().Find(m => m.MemberID == id);
+            return GetAll().Find(m => m.MemberID == id) ?? new Member();
         }
 
         public void Add(Member entity)

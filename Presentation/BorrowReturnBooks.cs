@@ -1,7 +1,7 @@
 ﻿using LiMS.Application;
 using LiMS.Domain;
 
-namespace Presentation
+namespace LiMS.Presentation
 {
     public static class BorrowReturnBooks
     {

@@ -1,7 +1,7 @@
 ﻿using LiMS.Application;
 using LiMS.Domain;
 
-namespace Presentation
+namespace LiMS.Presentation
 {
     public static class BookManagement
     {
@@ -50,7 +50,7 @@ namespace Presentation
             do
             {
                 Console.Write("Title: ");
-                title = Console.ReadLine();
+                title = Console.ReadLine() ?? "";
 
                 if (string.IsNullOrWhiteSpace(title))
                 {
@@ -63,7 +63,7 @@ namespace Presentation
             do
             {
                 Console.Write("Author: ");
-                author = Console.ReadLine();
+                author = Console.ReadLine() ?? "";
 
                 if (string.IsNullOrWhiteSpace(author))
                 {
@@ -93,9 +93,9 @@ namespace Presentation
                 if (bookToUpdate != null)
                 {
                     Console.Write("New title (leave blank to keep current): ");
-                    string newTitle = Console.ReadLine();
+                    string newTitle = Console.ReadLine() ?? "";
                     Console.Write("New author (leave blank to keep current): ");
-                    string newAuthor = Console.ReadLine();
+                    string newAuthor = Console.ReadLine() ?? "";
 
                     if (!string.IsNullOrWhiteSpace(newTitle))
                         bookToUpdate.Title = newTitle;

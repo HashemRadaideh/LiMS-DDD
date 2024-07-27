@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+
 using LiMS.Domain;
 
 namespace LiMS.Infrastructure
@@ -11,12 +12,12 @@ namespace LiMS.Infrastructure
                 return [];
 
             string booksJson = File.ReadAllText(booksFile);
-            return JsonConvert.DeserializeObject<List<Book>>(booksJson);
+            return JsonConvert.DeserializeObject<List<Book>>(booksJson) ?? new List<Book>();
         }
 
         public Book GetById(int id)
         {
-            return GetAll().Find(b => b.BookId == id);
+            return GetAll().Find(b => b.BookId == id) ?? new Book();
         }
 
         public void Add(Book entity)

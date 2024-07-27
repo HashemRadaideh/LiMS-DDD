@@ -1,7 +1,7 @@
 ﻿using LiMS.Application;
 using LiMS.Infrastructure;
 
-namespace Presentation
+namespace LiMS.Presentation
 {
     public class Program(LibraryService libraryService)
     {
@@ -53,8 +53,8 @@ namespace Presentation
         public static void Main(string[] args)
         {
             // Example of using Program with a real LibraryService
-            string bookFile = "/home/hashem/Workspace/Test/Infrastructure/Books.json";
-            string memberFile = "/home/hashem/Workspace/Test/Infrastructure/Members.json";
+            string bookFile = "/home/hashem/Workspace/LiMS-DDD/Infrastructure/Books.json";
+            string memberFile = "/home/hashem/Workspace/LiMS-DDD/Infrastructure/Members.json";
             LibraryService libraryService = new LibraryService(new BookRepository(bookFile), new MemberRepository(memberFile));
             Program program = new Program(libraryService);
             program.Run();
